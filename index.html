@@ -1,16 +1,83 @@
-<section>
-    <p>
-        text
-    </p>
-    <p>
-        text
-    </p>
-    <p>
-        text
-    </p>
-</section>
-<ul>
-    <ul>1</ul>
-    <ul>2</ul>
-</ul>
-<a href="https://github.com/">гитхаб</a>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #1F1D2B;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.7;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        section {
+            max-width: 80%;
+            background: linear-gradient(to bottom right, #2C2A3E, #1F1D2B);
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+        }
+        
+        p {
+            font-size: 1.2em;
+            margin-bottom: 1.5rem;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        li {
+            margin-bottom: 1rem;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        a {
+            color: #FF7A59;
+            transition: all .3s ease-in-out;
+            text-decoration: underline;
+        }
+        
+        a:hover {
+            transform: translateY(-2px);
+            letter-spacing: 1px;
+        }
+        
+        @media screen and (max-width: 768px) {
+            section {
+                width: 90%;
+            }
+            
+            p {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>Dark Mode Стиль</title>
+</head>
+<body>
+    <section>
+        <h1 style="color:#FF7A59;">Добро пожаловать!</h1>
+        <p>Здесь представлена красивая и удобная страница в тёмных оттенках.</p>
+        <p>Мы используем градиентный фон и приятные глазу акценты, создавая комфортное пространство для чтения и взаимодействия.</p>
+        <p>Все элементы сайта адаптированы для удобства просмотра на любых устройствах.</p>
+        <ul>
+            <li><a href="#">Навигационный пункт 1</a></li>
+            <li><a href="#">Навигационный пункт 2</a></li>
+        </ul>
+        <a href="https://github.com/" target="_blank" rel="noopener noreferrer">Посмотреть GitHub →</a>
+    </section>
+</body>
+</html>
