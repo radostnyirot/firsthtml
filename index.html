@@ -3,81 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            background-color: #1F1D2B;
-            color: white;
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.7;
-            padding: 2rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        
+    <style>body {
+        background-color: #1F1D2B;
+        color: white;
+        font-family: 'Roboto', sans-serif;
+        line-height: 1.7;
+        padding: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    
+    section {
+        max-width: 80%;
+        background: linear-gradient(to bottom right, #2C2A3E, #1F1D2B);
+        border-radius: 15px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        padding: 2rem;
+    }
+    
+    h1 {
+        color: #FF7A59;
+        animation-name: floatText;
+        animation-duration: 30s;
+        animation-timing-function: cubic-bezier(-0.891, -0.6, -0.2, 0);
+        animation-iteration-count: infinite;
+    }
+    
+    @keyframes floatText {
+      from {transform: scale(1); opacity: 1;}
+      to   {transform: scale(10.8); opacity: 0.7;}
+    }
+    
+    p {
+        font-size: 1.2em;
+        margin-bottom: 1.5rem;
+    }
+    
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+    
+    li {
+        margin-bottom: 1rem;
+        position: relative;
+        cursor: pointer;
+    }
+    
+    a {
+        color: #FF7A59;
+        transition: all .3s ease-in-out;
+        text-decoration: underline;
+    }
+    
+    a:hover {
+        transform: translateY(-2px);
+        letter-spacing: 1px;
+    }
+    
+    canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+    
+    @media screen and (max-width: 768px) {
         section {
-            max-width: 80%;
-            background: linear-gradient(to bottom right, #2C2A3E, #1F1D2B);
-            border-radius: 15px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            padding: 2rem;
+            width: 90%;
         }
         
         p {
-            font-size: 1.2em;
-            margin-bottom: 1.5rem;
+            font-size: 1.1em;
         }
-        
-        ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        
-        li {
-            margin-bottom: 1rem;
-            position: relative;
-            cursor: pointer;
-        }
-        
-        a {
-            color: #FF7A59;
-            transition: all .3s ease-in-out;
-            text-decoration: underline;
-        }
-        
-        a:hover {
-            transform: translateY(-2px);
-            letter-spacing: 1px;
-        }
-        
-        @media screen and (max-width: 768px) {
-            section {
-                width: 90%;
-            }
-            
-            p {
-                font-size: 1.1em;
-            }
-        }
-    </style>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <title>Dark Mode Стиль</title>
+    }
+</style>
+<!-- Фонт Roboto -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/bundle.min.js"></script>
+<title>Уникальная страница с эффектом частиц</title>
 </head>
 <body>
-    <section>
-        <h1 style="color:#FF7A59;">Добро пожаловать!</h1>
-        <p>Здесь представлена красивая и удобная страница в тёмных оттенках.</p>
-        <p>Мы используем градиентный фон и приятные глазу акценты, создавая комфортное пространство для чтения и взаимодействия.</p>
-        <p>Все элементы сайта адаптированы для удобства просмотра на любых устройствах.</p>
-        <ul>
-            <li><a href="#">Навигационный пункт 1</a></li>
-            <li><a href="#">Навигационный пункт 2</a></li>
-        </ul>
-        <a href="https://github.com/" target="_blank" rel="noopener noreferrer">Посмотреть GitHub →</a>
-    </section>
+<canvas id="confettiCanvas"></canvas>
+
+<section>
+    <h1>Добро пожаловать!</h1>
+    <p>Эта страница наполнена красивыми эффектами и уникальной атмосферой, создаваемой тонкими деталями и выразительными стилями.</p>
+    <p>Мы добавили динамические частицы, плавающие вокруг экрана, придавая вашему сайту ощущение магии и глубины.</p>
+    <p>Создавайте уникальные впечатления вместе с нами!</p>
+    <ul>
+        <li><a href="#">Первый пункт меню</a></li>
+        <li><a href="#">Второй пункт меню</a></li>
+    </ul>
+    <a href="https://github.com/" target="_blank" rel="noopener noreferrer">Посмотреть GitHub →</a>
+</section>
+
+<script>
+// Функция для запуска эффекта конфетти
+const confetti = () => {
+const canvasElement = document.getElementById('confettiCanvas');
+if (!canvasElement || !canvasElement.getContext) return;
+
+// Создаем канвас для отображения конфетти
+const ctx = canvasElement.getContext('2d');
+canvasElement.width = window.innerWidth;
+canvasElement.height = window.innerHeight;
+
+function randomColor() {
+  return '#' + Math.floor(Math.random()*16777215).toString(16);
+}
+
+function drawParticle(x, y, size, color) {
+  ctx.beginPath();
+  ctx.fillStyle = color;
+  ctx.arc(x, y, size, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+let particles = [];
+
+for(let i = 0; i < 100; i++) {
+  particles.push({
+    x: Math.random() * canvasElement.width,
+    y: Math.random() * canvasElement.height,
+    dx: Math.random() * 2 - 1,
+    dy: Math.random() * 2 - 1,
+    radius: Math.random() * 3 + 1,
+    color: randomColor()
+  });
+}
+
+function animateParticles() {
+  requestAnimationFrame(animateParticles);
+  
+  ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+
+  particles.forEach((particle, index) => {
+    particle.x += particle.dx;
+    particle.y += particle.dy;
+
+    if(particle.x > canvasElement.width || particle.x < 0)
+      particle.dx *= -1;
+    if(particle.y > canvasElement.height || particle.y < 0)
+      particle.dy *= -1;
+
+    drawParticle(particle.x, particle.y, particle.radius, particle.color);
+  });
+}
+
+animateParticles();
+};
+
+window.onload = confetti;
+</script>
 </body>
 </html>
